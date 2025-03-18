@@ -1,0 +1,12 @@
+torch
+transformers
+peft
+bitsandbytes
+matplotlib
+numpy
+scikit-learn
+pandas
+tqdm
+jupyter
+ipykernel
+seaborn

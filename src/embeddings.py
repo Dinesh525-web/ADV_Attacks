@@ -1,11 +1,20 @@
 import torch
+from transformers import AutoModel, AutoTokenizer
+from config import MODEL_NAME, DEVICE
 
-def extract_embedding(tokenizer, model, text):
-    """Extracts token embeddings from Bio-Medical-Llama-3."""
-    inputs = tokenizer(text, return_tensors="pt").to("cuda")
+# Load tokenizer and model
+print("Loading model for embeddings...")
+tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+model = AutoModel.from_pretrained(MODEL_NAME).to(DEVICE)
+
+def get_embedding(text):
+    """Extracts embeddings from the given text."""
+    inputs = tokenizer(text, return_tensors="pt", padding=True, truncation=True).to(DEVICE)
     with torch.no_grad():
-        outputs = model(**inputs, output_hidden_states=True)
-    
-    # Extract last hidden state embeddings
-    embeddings = outputs.hidden_states[-1].squeeze(0)
-    return embeddings
+        outputs = model(**inputs)
+    return outputs.last_hidden_state.mean(dim=1).squeeze().cpu().numpy()
+
+if __name__ == "__main__":
+    sample_text = "Depression is a serious mental health condition."
+    embedding = get_embedding(sample_text)
+    print(f"Generated embedding shape: {embedding.shape}")

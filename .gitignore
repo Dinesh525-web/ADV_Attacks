@@ -1,0 +1,9 @@
+
+### **3. `.gitignore`** (Prevent unnecessary files from being committed)  
+```txt
+__pycache__/
+.ipynb_checkpoints/
+data/
+results/
+models/
+.env
