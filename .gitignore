@@ -1,9 +1,45 @@
-
-### **3. `.gitignore`** (Prevent unnecessary files from being committed)  
-```txt
+# Python bytecode files
+*.pyc
+*.pyo
 __pycache__/
+
+# Jupyter Notebook checkpoints
 .ipynb_checkpoints/
-data/
-results/
+
+# Logs
+logs/
+*.log
+
+# Virtual environment
+venv/
+env/
+.venv/
+
+# Dependency directories
+# if using pipenv
+Pipfile.lock
+
+# if using conda
+environment.yml
+
+# system files
+.DS_Store  # macOS-specific
+Thumbs.db  # Windows-specific
+
+# PyCharm or other IDEs
+.idea/
+
+# VSCode settings
+.vscode/
+
+# Specific files/folders related to your project
+# You can also ignore specific files or folders like your model weights, results, etc.
 models/
+results/
+data/
+
+# Ignore config files that contain sensitive information (e.g. API keys)
+config.py
+
+# Ignore .env file
 .env
