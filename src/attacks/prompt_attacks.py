@@ -1,3 +1,9 @@
+import sys
+import os
+import torch
+import logging
+# Add the root directory of your project to the sys.path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from src.model_handler import model, tokenizer
 
 def generate_adversarial_prompt(original_prompt):

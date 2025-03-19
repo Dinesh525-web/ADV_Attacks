@@ -10,3 +10,4 @@ tqdm
 jupyter
 ipykernel
 seaborn
+gputil
