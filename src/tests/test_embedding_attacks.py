@@ -1,6 +1,10 @@
 import torch
 from prompting import generate_response
 from scoring import evaluate_attack
+from src.utils.logging_utils import get_logger
+
+# Set up the general logger
+logger = get_logger()
 
 # Define test cases for prompt-based adversarial attacks
 test_cases = [
@@ -10,10 +14,28 @@ test_cases = [
 ]
 
 results = []
-for original, adversarial, expected in test_cases:
-    print(f"Testing attack: {adversarial}")
-    result = evaluate_attack(original, adversarial, expected)
-    results.append(result)
-    print(result)
 
+# Start of the testing process
+logger.info("Starting adversarial attack testing...")
+
+for original, adversarial, expected in test_cases:
+    try:
+        logger.info(f"Testing attack: {adversarial}")
+        print(f"Testing attack: {adversarial}")
+        
+        # Evaluate the attack
+        result = evaluate_attack(original, adversarial, expected)
+        results.append(result)
+
+        # Log the results
+        logger.info(f"Result for adversarial attack '{adversarial}': {result}")
+        print(result)
+    
+    except Exception as e:
+        # Log any errors that happen during a test case
+        logger.error(f"Error during testing adversarial attack '{adversarial}': {e}")
+        print(f"Error during testing: {e}")
+
+# Test completion log
+logger.info("Adversarial attack testing completed.")
 print("Test completed.")

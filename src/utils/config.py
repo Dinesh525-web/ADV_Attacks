@@ -3,7 +3,7 @@ import os
 from src.utils.logging_utils import get_logger
 
 # Set up logger
-logger = get_logger(__name__)
+logger = get_logger()
 
 # General Configurations
 try:

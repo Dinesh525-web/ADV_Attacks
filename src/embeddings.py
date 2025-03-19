@@ -1,20 +1,47 @@
 import torch
 from transformers import AutoModel, AutoTokenizer
+from src.utils.logging_utils import get_logger
 from config import MODEL_NAME, DEVICE
 
+# Set up the logger
+logger = get_logger()
+
 # Load tokenizer and model
-print("Loading model for embeddings...")
-tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
-model = AutoModel.from_pretrained(MODEL_NAME).to(DEVICE)
+logger.info("Loading model for embeddings...")
+try:
+    tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+    model = AutoModel.from_pretrained(MODEL_NAME).to(DEVICE)
+    logger.info("Model and tokenizer loaded successfully.")
+except Exception as e:
+    logger.error(f"Error loading model or tokenizer: {e}")
+    raise
 
 def get_embedding(text):
     """Extracts embeddings from the given text."""
-    inputs = tokenizer(text, return_tensors="pt", padding=True, truncation=True).to(DEVICE)
-    with torch.no_grad():
-        outputs = model(**inputs)
-    return outputs.last_hidden_state.mean(dim=1).squeeze().cpu().numpy()
+    try:
+        logger.info(f"Extracting embedding for text: {text[:50]}...")  # Log a snippet of the text
+        
+        inputs = tokenizer(text, return_tensors="pt", padding=True, truncation=True).to(DEVICE)
+        
+        with torch.no_grad():
+            outputs = model(**inputs)
+        
+        # Calculate the mean embedding across the tokens
+        embedding = outputs.last_hidden_state.mean(dim=1).squeeze().cpu().numpy()
+
+        # Log the shape of the generated embedding
+        logger.info(f"Generated embedding shape: {embedding.shape}")
+        return embedding
+    
+    except Exception as e:
+        logger.error(f"Error extracting embedding for text: {text}. Error: {e}")
+        return None
 
 if __name__ == "__main__":
     sample_text = "Depression is a serious mental health condition."
     embedding = get_embedding(sample_text)
-    print(f"Generated embedding shape: {embedding.shape}")
+    
+    if embedding is not None:
+        print(f"Generated embedding shape: {embedding.shape}")
+    else:
+        print("Error occurred while generating embedding.")

@@ -10,8 +10,9 @@ if not os.path.exists(log_dir):
 # Configure logging settings
 log_file_path = os.path.join(log_dir, "project.log")
 
+# Set up general logger to log everything in the project
 logging.basicConfig(
-    level=logging.INFO,
+    level=logging.INFO,  # You can set this to DEBUG for more detailed logs
     format="%(asctime)s - %(levelname)s - %(message)s",
     handlers=[
         logging.StreamHandler(sys.stdout),
@@ -19,5 +20,9 @@ logging.basicConfig(
     ]
 )
 
-def get_logger(name):
-    return logging.getLogger(name)
+# Create a general logger for the entire project
+logger = logging.getLogger("GeneralLogger")
+
+def get_logger(name=None):
+    # Allow specific module logs or fallback to general logger
+    return logging.getLogger(name or "GeneralLogger")
