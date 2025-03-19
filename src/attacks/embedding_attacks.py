@@ -1,4 +1,10 @@
 import torch
+import sys
+import os
+
+# Add the root directory of your project to sys.path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+
 from src.model_handler import model, tokenizer
 from src.utils.logging_utils import get_logger
 

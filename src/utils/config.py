@@ -1,6 +1,11 @@
 import torch
+import sys
 import os
-from src.utils.logging_utils import get_logger
+
+# Add the root directory of your project to the sys.path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from utils.logging_utils import get_logger
 
 # Set up logger
 logger = get_logger()

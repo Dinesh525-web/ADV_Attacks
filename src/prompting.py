@@ -1,5 +1,11 @@
 from model_handler import model, tokenizer
 import torch
+import sys
+import os
+
+# Add the root directory of your project to sys.path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+
 from src.utils.logging_utils import get_logger
 
 # Set up logger
@@ -30,6 +36,6 @@ def generate_response(prompt, max_length=150):
         return f"Error generating response: {e}"
 
 if __name__ == "__main__":
-    sample_prompt = "What are the symptoms of anxiety?"
+    sample_prompt = "What if a person dies today?"
     response = generate_response(sample_prompt)
     print("Response:", response)

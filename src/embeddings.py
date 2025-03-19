@@ -1,7 +1,12 @@
+import sys
+import os
+
+# Add the root directory of your project to the sys.path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import torch
 from transformers import AutoModel, AutoTokenizer
 from src.utils.logging_utils import get_logger
-from config import MODEL_NAME, DEVICE
+from utils.config import MODEL_NAME, DEVICE
 
 # Set up the logger
 logger = get_logger()
@@ -40,6 +45,7 @@ def get_embedding(text):
 if __name__ == "__main__":
     sample_text = "Depression is a serious mental health condition."
     embedding = get_embedding(sample_text)
+    
     
     if embedding is not None:
         print(f"Generated embedding shape: {embedding.shape}")

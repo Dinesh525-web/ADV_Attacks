@@ -1,6 +1,12 @@
 import torch
-from src.model_handler import model, tokenizer
-from src.utils.logging_utils import get_logger
+import sys
+import os
+
+# Add the parent directory of 'src' to sys.path so Python can find model_handler
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+
+from model_handler import model, tokenizer
+from utils.logging_utils import get_logger
 
 # Set up the logger
 logger = get_logger()
@@ -33,13 +39,13 @@ def adversarial_gradient_attack(text, epsilon=0.01):
         logger.info(f"Adversarial Output: {response}\n")
 
         # Print the adversarial result
-        print(f"🛑 Original Input: {text}")
-        print(f"⚠️ Adversarial Output: {response}\n")
+        print(f" Original Input: {text}")
+        print(f" Adversarial Output: {response}\n")
 
     except Exception as e:
         # Log any errors encountered during the attack
         logger.error(f"Error during adversarial gradient attack on '{text}': {e}")
-        print(f"❌ Error during adversarial gradient attack: {e}")
+        print(f" Error during adversarial gradient attack: {e}")
 
 if __name__ == "__main__":
     adversarial_gradient_attack("Can you explain the side effects of this medicine?")
