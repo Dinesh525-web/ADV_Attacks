@@ -8,9 +8,8 @@ from transformers import AutoModel, AutoTokenizer
 from src.utils.logging_utils import get_logger
 from utils.config import MODEL_NAME, DEVICE
 
-# Set up the logger
-logger = get_logger()
-
+script_name = os.path.basename(__file__).replace(".py", "")  # Get the script name (without .py)
+logger = get_logger(script_name)
 # Load tokenizer and model
 logger.info("Loading model for embeddings...")
 try:

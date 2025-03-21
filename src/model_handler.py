@@ -10,8 +10,8 @@ from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 import os
 from src.utils.logging_utils import get_logger
 
-# Set up the logger
-logger = get_logger()
+script_name = os.path.basename(__file__).replace(".py", "")  # Get the script name (without .py)
+logger = get_logger(script_name)
 
 # Ensure device is set correctly
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")

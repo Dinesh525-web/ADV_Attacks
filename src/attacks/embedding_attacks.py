@@ -8,8 +8,8 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '.
 from src.model_handler import model, tokenizer
 from src.utils.logging_utils import get_logger
 
-# Set up the logger
-logger = get_logger()
+script_name = os.path.basename(__file__).replace(".py", "")  # Get the script name (without .py)
+logger = get_logger(script_name)
 
 def perturb_embeddings(embedding_tensor, epsilon=0.01):
     """Perturbs the embeddings by adding noise."""

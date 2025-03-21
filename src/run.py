@@ -2,8 +2,8 @@ from prompting import generate_response
 from scoring import evaluate_attack
 from src.utils.logging_utils import get_logger
 
-# Set up the general logger
-logger = get_logger()
+script_name = os.path.basename(__file__).replace(".py", "")  # Get the script name (without .py)
+logger = get_logger(script_name)
 
 def main():
     """Runs the adversarial attack evaluation."""

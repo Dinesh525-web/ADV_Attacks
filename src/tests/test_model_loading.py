@@ -2,8 +2,8 @@ import torch
 from src.model_handler import model
 from src.utils.logging_utils import get_logger
 
-# Set up the logger
-logger = get_logger()
+script_name = os.path.basename(__file__).replace(".py", "")  # Get the script name (without .py)
+logger = get_logger(script_name)
 
 def test_model_loads():
     try:
