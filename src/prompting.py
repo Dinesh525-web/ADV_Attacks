@@ -8,8 +8,8 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '.
 
 from src.utils.logging_utils import get_logger
 
-# Set up logger
-logger = get_logger()
+script_name = os.path.basename(__file__).replace(".py", "")  # Get the script name (without .py)
+logger = get_logger(script_name)
 
 def generate_response(prompt, max_length=150):
     """Generates a response from the model given a prompt."""

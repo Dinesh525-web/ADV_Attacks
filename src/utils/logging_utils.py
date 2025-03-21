@@ -2,27 +2,37 @@ import logging
 import sys
 import os
 
-# Ensure the logs directory exists
-log_dir = "logs"
-if not os.path.exists(log_dir):
-    os.makedirs(log_dir)
+def get_logger(script_name=None):
+    # Ensure the logs directory exists
+    log_dir = "logs"
+    if not os.path.exists(log_dir):
+        os.makedirs(log_dir)
 
-# Configure logging settings
-log_file_path = os.path.join(log_dir, "project.log")
+    # Default to the script name if provided, otherwise use a fallback name
+    if not script_name:
+        script_name = "default"
 
-# Set up general logger to log everything in the project
-logging.basicConfig(
-    level=logging.INFO,  # You can set this to DEBUG for more detailed logs
-    format="%(asctime)s - %(levelname)s - %(message)s",
-    handlers=[
-        logging.StreamHandler(sys.stdout),
-        logging.FileHandler(log_file_path, mode="a")
-    ]
-)
+    log_file_path = os.path.join(log_dir, f"{script_name}.log")
 
-# Create a general logger for the entire project
-logger = logging.getLogger("GeneralLogger")
+    # Set up the logger
+    logger = logging.getLogger(script_name)
+    logger.setLevel(logging.INFO)  # Set the logging level (INFO or DEBUG)
 
-def get_logger(name=None):
-    # Allow specific module logs or fallback to general logger
-    return logging.getLogger(name or "GeneralLogger")
+    # Create a file handler that logs to a file in the 'logs' folder
+    file_handler = logging.FileHandler(log_file_path, mode='a')
+    file_handler.setLevel(logging.INFO)  # Log level for the file handler
+
+    # Create a console handler that prints to the console
+    console_handler = logging.StreamHandler(sys.stdout)
+    console_handler.setLevel(logging.INFO)
+
+    # Create a formatter for consistent log formatting
+    formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+    file_handler.setFormatter(formatter)
+    console_handler.setFormatter(formatter)
+
+    # Add handlers to the logger
+    logger.addHandler(file_handler)
+    logger.addHandler(console_handler)
+
+    return logger
