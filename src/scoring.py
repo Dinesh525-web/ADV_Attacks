@@ -1,4 +1,4 @@
-from model_handler import model, tokenizer
+from model_handler_2 import model, tokenizer
 from prompting import generate_response
 import torch
 from sklearn.metrics import accuracy_score, f1_score

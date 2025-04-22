@@ -5,7 +5,7 @@ import os
 # Add the root directory of your project to sys.path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
-from src.model_handler import model, tokenizer
+from model_handler_2 import model, tokenizer
 from src.utils.logging_utils import get_logger
 
 script_name = os.path.basename(__file__).replace(".py", "")  # Get the script name (without .py)

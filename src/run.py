@@ -1,6 +1,7 @@
 from prompting import generate_response
 from scoring import evaluate_attack
 from src.utils.logging_utils import get_logger
+import os
 
 script_name = os.path.basename(__file__).replace(".py", "")  # Get the script name (without .py)
 logger = get_logger(script_name)

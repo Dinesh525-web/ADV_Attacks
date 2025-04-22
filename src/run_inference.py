@@ -1,11 +1,11 @@
 import sys
 import os
 import torch
-from model_handler import model, tokenizer
+from model_handler_2 import model, tokenizer
 from src.utils.logging_utils import get_logger
 from src.utils.config import DEVICE
 
-script_name = os.path.basename(__file__).replace(".py", "")  # Get the script name (without .py)
+script_name = os.path.basename(__file__).replace(".py", "")  
 logger = get_logger(script_name)
 
 # Add the root directory of your project to the sys.path

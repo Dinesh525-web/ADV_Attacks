@@ -5,7 +5,7 @@ import os
 # Add the parent directory of 'src' to sys.path so Python can find model_handler
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
-from model_handler import model, tokenizer
+from model_handler_2 import model, tokenizer
 from utils.logging_utils import get_logger
 
 script_name = os.path.basename(__file__).replace(".py", "")  # Get the script name (without .py)

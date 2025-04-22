@@ -10,6 +10,7 @@ from utils.config import MODEL_NAME, DEVICE
 
 script_name = os.path.basename(__file__).replace(".py", "")  # Get the script name (without .py)
 logger = get_logger(script_name)
+
 # Load tokenizer and model
 logger.info("Loading model for embeddings...")
 try:
