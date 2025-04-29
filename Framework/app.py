@@ -4,7 +4,7 @@ import os
 
 # Add the root directory of your project to the sys.path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from Framework.src.chatbot.chatbot import get_answer
+from src.chatbot.chatbot import get_answer
 
 app = Flask(__name__)
 
