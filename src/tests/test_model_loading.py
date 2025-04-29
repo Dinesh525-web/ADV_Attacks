@@ -1,5 +1,6 @@
 import torch
-from src.model_handler import model
+import os
+from model_handler_2 import model
 from src.utils.logging_utils import get_logger
 
 script_name = os.path.basename(__file__).replace(".py", "")  # Get the script name (without .py)
