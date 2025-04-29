@@ -11,3 +11,7 @@ jupyter
 ipykernel
 seaborn
 gputil
+flask
+datasets
+cryptography
+unittest2
